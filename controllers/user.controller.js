@@ -112,12 +112,7 @@ export const updateUser = async (req, res) => {
     delete updates.password; // Password shouldn't be updated here
     delete updates._id; // Prevent changing the document's ID
 
-    try {
-         // Validate email format using regex
-         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-         if (!emailRegex.test(updates?.email)) {
-             return res.status(400).json({ success: false, message: 'Invalid email format' });
-         }
+    try {        
         const updatedUser = await User.findByIdAndUpdate(
             id,
             updates,
